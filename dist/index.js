@@ -1580,7 +1580,13 @@ try {
   _.set(slackMessageBody, 'blocks[0].text.text', body.title);
 
   // Assign changelog title
-  _.set(slackMessageBody, 'blocks[1].text.text', `*<${body.href}|Changelog>*`);
+  let changelogTitle = 'Changelog'
+
+  if (_.has(body, 'href')) {
+    changelogTitle = `*<${body.href}|Changelog>*`
+  }
+
+  _.set(slackMessageBody, 'blocks[1].text.text', changelogTitle);
 
   // Generate changelog from commits
   _.isArray(body.commits) && _.forEach(body.commits, (log) => {
