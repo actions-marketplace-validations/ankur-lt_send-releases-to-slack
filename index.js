@@ -13,10 +13,13 @@ try {
     body = JSON.parse(body)
   }
 
-  if (_.isEmpty(body)) {
-    console.log('Changelog is empty!');
-    core.setFailed('Changelog is empty!');
+  if (_.isEmpty(body) && !Array.isArray(body)) {
+    console.log('Changelog is empty or not in required format!');
+    core.setFailed('Changelog is empty or not in required format!');
   }
+
+  // Get first release of the body
+  body = body[0]
 
   // initialise skeleton of slack message body
   let slackMessageBody = {
