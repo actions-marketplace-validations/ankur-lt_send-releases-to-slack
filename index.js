@@ -10,6 +10,7 @@ try {
   console.log('Changelog Body received::', body);
 
   if (typeof body === 'string') {
+    console.log('Parsing the stringified body to JSON')
     body = JSON.parse(body)
   }
 
@@ -20,6 +21,7 @@ try {
 
   // Get first release of the body
   body = body[0]
+  console.log('Current release changelog received as::', body)
 
   // initialise skeleton of slack message body
   let slackMessageBody = {
