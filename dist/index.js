@@ -1529,16 +1529,23 @@ try {
   // `body` input defined in action metadata file
   let body = core.getInput('body');
 
+  console.log('Using version v1.0.6')
+
   console.log('Changelog Body received::', body);
 
   if (typeof body === 'string') {
+    console.log('Parsing the stringified body to JSON')
     body = JSON.parse(body)
   }
 
-  if (_.isEmpty(body)) {
-    console.log('Changelog is empty!');
-    core.setFailed('Changelog is empty!');
+  if (_.isEmpty(body) && !Array.isArray(body)) {
+    console.log('Changelog is empty or not in required format!');
+    core.setFailed('Changelog is empty or not in required format!');
   }
+
+  // Get first release of the body
+  body = body[0]
+  console.log('Current release changelog received as::', body)
 
   // initialise skeleton of slack message body
   let slackMessageBody = {
