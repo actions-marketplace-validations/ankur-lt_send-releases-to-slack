@@ -4,6 +4,9 @@ inputs:
   webhook_url:  # id of input
     description: 'webhook url'
     required: true
+  repo_name: # repo name
+    description: 'repo_name'
+    required: false
   body:
     description: 'JSON changelog output supported by https://www.npmjs.com/package/auto-changelog'
     required: true

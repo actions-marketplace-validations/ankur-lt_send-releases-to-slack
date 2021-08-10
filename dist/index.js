@@ -1528,6 +1528,7 @@ const _ = __webpack_require__(557);
 try {
   // `body` input defined in action metadata file
   let body = core.getInput('body');
+  let repoName = core.getInput('repo_name');
 
   console.log('Using version v1.0.6')
 
@@ -1577,12 +1578,12 @@ try {
   let slackChangelog = '```\n';
 
   // Assign header for message
-  _.set(slackMessageBody, 'blocks[0].text.text', body.title);
+  _.set(slackMessageBody, 'blocks[0].text.text', `${repoName} ${body.title}`);
 
   // Assign changelog title
   let changelogTitle = 'Changelog'
 
-  if (_.has(body, 'href')) {
+  if (body.href) {
     changelogTitle = `*<${body.href}|Changelog>*`
   }
 
