@@ -1,5 +1,4 @@
 const core = require('@actions/core');
-const github = require('@actions/github');
 const SLACK_WEBHOOK_URL = core.getInput('webhook_url');
 const slack = require('slack-notify')(SLACK_WEBHOOK_URL || 'https://hooks.slack.com/services/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');
 const _ = require('lodash');
