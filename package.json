@@ -2,9 +2,9 @@
   "name": "slack-notifier-action",
   "version": "1.0.1",
   "description": "A Github action for posting workflow notifications to Slack.",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "build": "ncc build src/index.js",
+    "build": "ncc build index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "run-test": "node index.js"
   },
