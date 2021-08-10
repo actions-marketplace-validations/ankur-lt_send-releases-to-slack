@@ -1,0 +1,15 @@
+name: 'Send releases to slack'
+description: 'A Github action for posting release notes to slack'
+inputs:
+  webhook_url:  # id of input
+    description: 'webhook url'
+    required: true
+  body:
+    description: 'JSON changelog output supported by https://www.npmjs.com/package/auto-changelog'
+    required: true
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
+branding:
+  icon: 'at-sign'
+  color: 'gray-dark'
