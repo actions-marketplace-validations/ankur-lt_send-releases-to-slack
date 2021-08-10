@@ -7,6 +7,8 @@ try {
   // `body` input defined in action metadata file
   let body = core.getInput('body');
 
+  console.log('Using version v1.0.6')
+
   console.log('Changelog Body received::', body);
 
   if (typeof body === 'string') {
