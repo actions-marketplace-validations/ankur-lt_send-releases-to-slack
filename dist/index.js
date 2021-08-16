@@ -1530,7 +1530,7 @@ try {
   let body = core.getInput('body');
   let repoName = core.getInput('repo_name');
 
-  console.log('Using version v1.0.6')
+  console.log('Using version v1.0.7')
 
   console.log('Changelog Body received::', body);
 
@@ -1591,17 +1591,17 @@ try {
 
   // Generate changelog from commits
   _.isArray(body.commits) && _.forEach(body.commits, (log) => {
-    slackChangelog += `- <${log.href}|${log.subject}>\n`;
+    slackChangelog += `- <${log.href}|${_.get(log, 'subject')}>\n`;
   });
 
   // Generate changelog from merges
   _.isArray(body.merges) && _.forEach(body.merges, (log) => {
-    slackChangelog += `- <${log.href}|${log.message}>\n`;
+    slackChangelog += `- <${log.href}|${_.get(log, 'message')}>\n`;
   });
 
   // Generate changelog from fixes
   _.isArray(body.fixes) && _.forEach(body.fixes, (log) => {
-    slackChangelog += `- <${log.href}|${log.subject || log.message}>\n`;
+    slackChangelog += `- <${log.href}|${_.get(log, 'subject') || _.get(log, 'message')}>\n`;
   });
 
   // Add closing code snippets to the body
