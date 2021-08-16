@@ -54,7 +54,7 @@ try {
   let slackChangelog = '```\n';
 
   // Assign header for message
-  _.set(slackMessageBody, 'blocks[0].text.text', `${repoName} ${body.title}`);
+  _.set(slackMessageBody, 'blocks[0].text.text', `${repoName} ${_.get(body, 'title')}`);
 
   // Assign changelog title
   let changelogTitle = 'Changelog'
