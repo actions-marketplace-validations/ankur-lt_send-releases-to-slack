@@ -8,8 +8,6 @@ try {
   let body = core.getInput('body');
   let repoName = core.getInput('repo_name');
 
-  console.log('Using version v1.0.7')
-
   console.log('Changelog Body received::', body);
 
   if (typeof body === 'string') {
@@ -24,7 +22,7 @@ try {
 
   // Get first release of the body
   body = body[0]
-  console.log('Current release changelog received as::', body)
+  console.log('Current release changelog parsed as::', JSON.stringify(body))
 
   // initialise skeleton of slack message body
   let slackMessageBody = {
@@ -90,7 +88,7 @@ try {
 
   // Send slack alert
   // Channel has been configured in the respective slack app
-  console.log('Sending slack message as::', slackMessageBody)
+  console.log('Sending slack message as::', JSON.stringify(slackMessageBody))
   slack.alert(slackMessageBody);
 
   slack.onError = function(err) {
