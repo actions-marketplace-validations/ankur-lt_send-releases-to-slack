@@ -1,6 +1,6 @@
 {
   "name": "slack-notifier-action",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "A Github action for posting workflow notifications to Slack.",
   "main": "dist/index.js",
   "scripts": {

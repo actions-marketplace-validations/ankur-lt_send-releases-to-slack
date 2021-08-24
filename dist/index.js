@@ -1529,8 +1529,7 @@ try {
   // `body` input defined in action metadata file
   let body = core.getInput('body');
   let repoName = core.getInput('repo_name');
-
-  console.log('Using version v1.0.7')
+  let revertedRelease = core.getInput('revertedRelease');
 
   console.log('Changelog Body received::', body);
 
@@ -1544,9 +1543,14 @@ try {
     core.setFailed('Changelog is empty or not in required format!');
   }
 
-  // Get first release of the body
-  body = body[0]
-  console.log('Current release changelog received as::', body)
+  // Get first release of the body for normal release, else the last one for reverted release
+  if (revertedRelease === 'true' || revertedRelease === true) {
+    body = body[body.length - 1]
+  }
+  else {
+    body = body[0]
+  }
+  console.log('Current release changelog parsed as::', JSON.stringify(body))
 
   // initialise skeleton of slack message body
   let slackMessageBody = {
@@ -1578,7 +1582,7 @@ try {
   let slackChangelog = '```\n';
 
   // Assign header for message
-  _.set(slackMessageBody, 'blocks[0].text.text', `${repoName} ${body.title}`);
+  _.set(slackMessageBody, 'blocks[0].text.text', `${repoName} ${_.get(body, 'title')}`);
 
   // Assign changelog title
   let changelogTitle = 'Changelog'
@@ -1612,7 +1616,7 @@ try {
 
   // Send slack alert
   // Channel has been configured in the respective slack app
-  console.log('Sending slack message as::', slackMessageBody)
+  console.log('Sending slack message as::', JSON.stringify(slackMessageBody))
   slack.alert(slackMessageBody);
 
   slack.onError = function(err) {

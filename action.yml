@@ -10,6 +10,9 @@ inputs:
   body:
     description: 'JSON changelog output supported by https://www.npmjs.com/package/auto-changelog'
     required: true
+  reverted_release:
+    description: 'Is the release reverted? Boolean value'
+    required: false
 runs:
   using: 'node12'
   main: 'dist/index.js'

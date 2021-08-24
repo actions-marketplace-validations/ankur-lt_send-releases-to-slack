@@ -7,6 +7,7 @@ try {
   // `body` input defined in action metadata file
   let body = core.getInput('body');
   let repoName = core.getInput('repo_name');
+  let revertedRelease = core.getInput('revertedRelease');
 
   console.log('Changelog Body received::', body);
 
@@ -20,8 +21,13 @@ try {
     core.setFailed('Changelog is empty or not in required format!');
   }
 
-  // Get first release of the body
-  body = body[0]
+  // Get first release of the body for normal release, else the last one for reverted release
+  if (revertedRelease === 'true' || revertedRelease === true) {
+    body = body[body.length - 1]
+  }
+  else {
+    body = body[0]
+  }
   console.log('Current release changelog parsed as::', JSON.stringify(body))
 
   // initialise skeleton of slack message body
