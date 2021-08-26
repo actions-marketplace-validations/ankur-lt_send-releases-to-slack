@@ -7,7 +7,7 @@ try {
   // `body` input defined in action metadata file
   let body = core.getInput('body');
   let repoName = core.getInput('repo_name');
-  let revertedRelease = core.getInput('revertedRelease');
+  let revertedRelease = core.getInput('reverted_release');
 
   console.log('Changelog Body received::', body);
 
