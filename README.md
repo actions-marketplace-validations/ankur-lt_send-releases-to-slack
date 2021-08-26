@@ -14,7 +14,7 @@ jobs:
   generate-changelog:
     runs-on: ubuntu-latest
     steps:
-        # Send JSON changelog to the alack app which posts it on slack
+        # Send JSON changelog to the slack app
       - name: Send release notes to sack
         uses: ankur-lt/send-releases-to-slack@v1.1.0
         with:
