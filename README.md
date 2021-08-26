@@ -1,4 +1,8 @@
- ```yaml
+# Send Release Changelog to Slack
+The Github action supports sending the release changelog to slack. The data supported by the `body` parameter is the JSON changelog output supported by https://www.npmjs.com/package/auto-changelog.
+
+
+```yaml
 name: Changelog
 
 on:
@@ -10,13 +14,12 @@ jobs:
   generate-changelog:
     runs-on: ubuntu-latest
     steps:
-      - name: Initial setup
-        uses: actions/checkout@v2
-
-      - name: Get latest tagname
-        uses: ankur-lt/send-releases-to-slack@v1.0.1
+        # Send JSON changelog to the alack app which posts it on slack
+      - name: Send release notes to sack
+        uses: ankur-lt/send-releases-to-slack@v1.1.0
         with:
+          repo_display_name: 'Service Name'
           webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
-          body: 'body'
-
+          body: ${{ steps.jsonChangelog.outputs.content }}
+          reverted_release: false
 ```

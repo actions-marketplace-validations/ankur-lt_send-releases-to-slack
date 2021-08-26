@@ -6,8 +6,8 @@ const _ = require('lodash');
 try {
   // `body` input defined in action metadata file
   let body = core.getInput('body');
-  let repoName = core.getInput('repo_name');
-  let revertedRelease = core.getInput('reverted_release');
+  let repoName = core.getInput('repo_display_name');
+  let revertedRelease = core.getBooleanInput('reverted_release');
 
   console.log('Changelog Body received::', body);
 
@@ -22,7 +22,7 @@ try {
   }
 
   // Get first release of the body for normal release, else the last one for reverted release
-  if (revertedRelease === 'true' || revertedRelease === true) {
+  if (revertedRelease === true) {
     body = body[body.length - 1];
     console.log('Getting the last release as revertedRelease::', revertedRelease);
   } else {

@@ -1,14 +1,14 @@
 {
-  "name": "slack-notifier-action",
-  "version": "1.0.15",
-  "description": "A Github action for posting workflow notifications to Slack.",
+  "name": "send-releases-to-slack",
+  "version": "1.1.0",
+  "description": "A Github action for posting release notifications to Slack.",
   "main": "dist/index.js",
   "scripts": {
     "build": "ncc build index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "run-test": "node index.js"
+    "run": "node index.js"
   },
-  "author": "Gymshark Engineering (https://github.com/gymshark)",
+  "author": "Ankur Narkhede (https://github.com/ankur-lt)",
   "license": "ISC",
   "dependencies": {
     "@actions/core": "^1.2.0",
