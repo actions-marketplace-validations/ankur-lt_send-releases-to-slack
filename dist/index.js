@@ -1529,9 +1529,7 @@ try {
   // `body` input defined in action metadata file
   let body = core.getInput('body');
   let repoName = core.getInput('repo_display_name');
-  let revertedRelease = core.getBooleanInput('reverted_release');
-
-  console.log('Changelog Body received::', body);
+  let tag = core.getInput('tag');
 
   if (typeof body === 'string') {
     console.log('Parsing the stringified body to JSON');
@@ -1543,14 +1541,11 @@ try {
     core.setFailed('Changelog is empty or not in required format!');
   }
 
-  // Get first release of the body for normal release, else the last one for reverted release
-  if (revertedRelease === true) {
-    body = body[body.length - 1];
-    console.log('Getting the last release as revertedRelease::', revertedRelease);
-  } else {
-    body = body[0];
-    console.log('Getting the first release as revertedRelease::', revertedRelease);
-  }
+  _.isArray(body) && _.forEach(body, (release, key) => {
+    if (_.get(release, 'tag') === tag) {
+      body = body[key]
+    }
+  });
 
   console.log('Current release changelog parsed as::', JSON.stringify(body));
 
