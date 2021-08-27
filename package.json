@@ -1,6 +1,6 @@
 {
   "name": "send-releases-to-slack",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A Github action for posting release notifications to Slack.",
   "main": "dist/index.js",
   "scripts": {
